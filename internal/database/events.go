@@ -6,20 +6,18 @@ import (
 	"time"
 )
 
-type EventModel struct { 
+type EventModel struct {
 	DB *sql.DB
 }
 
-
 type Event struct {
-	Id          int64  `json:"id"`
-	OwnerId     int64  `json:"owner_id" bind:"required"`
-	Name        string `json:"name" bind:"required,min=3"`
-	Description string `json:"description" bind:"required,min=10"`
-	Date        string `json:"date" bind:"required,datetime=2006-01-02"`
-	Location    string `json:"location" bind:"required,min=3"`
+	Id          int64    `json:"id"`
+	OwnerId     int64    `json:"ownerId"`
+	Name        string `json:"name" binding:"required,min=3"`
+	Description string `json:"description" binding:"required,min=10"`
+	Date        string `json:"date" binding:"required,datetime=2006-01-02"`
+	Location    string `json:"location" binding:"required,min=3"`
 }
-
 
 func (m *EventModel) Insert(event *Event) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
